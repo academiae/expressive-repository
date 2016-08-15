@@ -26,31 +26,37 @@
 
 namespace App\Middleware;
 
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Expressive\Router\RouteResult;
+use Zend\Stratigility\MiddlewareInterface;
 
-class JsonErrorHandlerMiddleware
+class JsonErrorHandlerMiddleware implements MiddlewareInterface
 {
     /**
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
-     * @param callable $out
+     *
+     * @param Request $request
+     * @param Response $response
+     * @param callable $next
      * @return JsonResponse
      */
-    public function __invoke(ServerRequestInterface $request, ResponseInterface $response, callable $out = null)
+    public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        $hasRoute = $request->getAttribute(RouteResult::class) !== null;
-        $isNotFound = ! $hasRoute && ! isset($err);
-        if ($isNotFound) {
-            $responsePhrase = 'Not found';
-            $status = 404;
-        } else {
-            $status = $response->getStatusCode();
-            $responsePhrase = $status < 400 ? 'Internal Server Error' : $response->getReasonPhrase();
-            $status = $status < 400 ? 500 : $status;
-        }
+//        $hasRoute = $request->getAttribute(RouteResult::class) !== null;
+////        var_dump("test"); exit;
+////        $isNotFound = ! $hasRoute && ! isset($next);
+//        if (!$hasRoute) {
+//
+//        } else {
+//            $status = $response->getStatusCode();
+//            $responsePhrase = $status < 400 ? 'Internal Server Error' : $response->getReasonPhrase();
+//            $status = $status < 400 ? 500 : $status;
+//        }
+        var_dump(RouteResult::class);
+        exit;
+        $responsePhrase = 'Not found';
+        $status = 404;
 
         return new JsonResponse([
             'error' => $this->responsePhraseToCode($responsePhrase),

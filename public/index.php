@@ -1,5 +1,11 @@
 <?php
 
+// For debugging purpose only
+if ($_SERVER['APPLICATION_ENV'] === 'development') {
+     error_reporting(E_ALL);
+     ini_set("display_errors", 1);
+}
+
 // Delegate static file requests back to the PHP built-in webserver
 if (php_sapi_name() === 'cli-server'
     && is_file(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH))

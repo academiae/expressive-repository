@@ -26,7 +26,10 @@
 
 namespace Student;
 
-class ConfigProvider
+/**
+ * Zend Expressive Config Provider
+ */
+final class ConfigProvider
 {
     public function __invoke()
     {
@@ -66,7 +69,9 @@ class ConfigProvider
             [
                 'name' => 'students',
                 'path' => '/students[/{uuid:[0-9]+}]',
-                'middleware' => Controller\MasterListController::class
+                'middleware' => [
+                    Controller\MasterListController::class
+                ]
             ],
 //            [
 //                'name' => 'students.alumni',

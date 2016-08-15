@@ -6,7 +6,7 @@ use Zend\Expressive\ConfigManager\ConfigManager;
  * Use Fully Qualified Namespace to enable the expressive configuration
  */
 $modules = [
-    App\Module::class,
+    App\ConfigProvider::class,
     Student\ConfigProvider::class,
     Employee\ConfigProvider::class,
     //Append module namespace here

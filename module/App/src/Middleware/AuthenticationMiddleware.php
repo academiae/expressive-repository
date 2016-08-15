@@ -24,14 +24,30 @@
  * THE SOFTWARE.
  */
 
-namespace App;
+namespace App\Middleware;
 
-use App\ConfigProvider;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+use Zend\Stratigility\MiddlewareInterface;
 
-class Module
+final class AuthenticationMiddleware implements MiddlewareInterface
 {
-    public function __invoke()
+    public function __invoke(Request $request, Response $response, callable $out = null)
     {
-        return (new ConfigProvider())->__invoke();
+//        $token = $request->getHeaderLine('Authorization');
+//
+//        if (empty($token)) {
+//            return $response->withStatusCode(401);
+//        }
+//
+//        try {
+//            $user = $this->userService->getByToken($token);
+//        } catch (NotFoundException $exception) {
+//            return $response->withStatusCode(401);
+//        }
+//
+//        $request = $request->withAttribute('logged_user', $user->getId());
+
+        return $out($request, $response);
     }
 }
