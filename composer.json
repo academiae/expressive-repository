@@ -1,0 +1,62 @@
+{
+    "name": "academiae/expressive-repository",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Gab Amba",
+            "homepage": "http://www.gabbydgab.com/",
+            "email": "gamba@gabbydgab.com"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev",
+            "dev-develop": "1.1-dev"
+        }
+    },
+    "require": {
+        "php": "^7.0",
+        "roave/security-advisories": "dev-master",
+        "zendframework/zend-expressive": "^1.0",
+        "zendframework/zend-expressive-helpers": "^2.0",
+        "zendframework/zend-stdlib": "^3.0",
+        "zendframework/zend-expressive-fastroute": "^1.0",
+        "zendframework/zend-servicemanager": "^3.1",
+        "ocramius/proxy-manager": "^2.0",
+        "mtymek/expressive-config-manager": "^1.0 || ~0.4",
+        "acelaya/ze-content-based-error-handler": "^1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.5",
+        "squizlabs/php_codesniffer": "^2.6",
+        "phpbench/phpbench": "^0.11.2",
+        "sebastian/phpcpd": "^2.0.4",
+        "filp/whoops": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "module/App/src/",
+            "Student\\": "module/Student/src/",
+            "Employee\\": "module/Employee/src/"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "@show-me-the-bugs"
+        ],
+        "post-update-cmd": [
+            "@show-me-the-bugs"
+        ],
+        "show-me-the-bugs": [
+            "@cs",
+            "@cpd",
+            "@test"
+        ],
+        "cs": "phpcs --ignore=/vendor,/build module",
+        "cs-fix": "phpcbf --ignore=/vendor,/build module",
+        "serve": "php -S 0.0.0.0:8080 -t public/ public/index.php",
+        "cpd": "phpcpd --exclude=/vendor,/build --names-exclude=Module.php,ConfigProvider.php --fuzzy module",
+        "test": "phpunit --verbose"
+    }
+}
